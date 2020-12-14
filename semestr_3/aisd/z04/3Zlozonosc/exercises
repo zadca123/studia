@@ -1,0 +1,14 @@
+4.1
+    log4(n) < k*log2(n) < 40 * log4(n) < n * log2(n) < 5n^2 < 4^n
+4.2
+    (a) T(n) = n^2 + 400n + 5          = O(n^2 + n + 1)     = O(n^2)
+    (b) T(n) = 67n + 3n                = O(n + n)           = O(n)
+    (c) T(n) = 2n + 5n log n + 100     = O(n + nlog n + 1)  = O(n)
+    (d) T(n) = log n + 2n^2 + 55       = O(log n + n^2 + 1) = O(n^2)
+    (e) T(n) = 3(2^n) + n^8 + 1024     = O(2^n + 8^n + 1)   = O(8^n)
+    (f) T(n, k) = kn + log k           = O(n + log n)       = O(n)
+    (g) T(n, k) = 9n + k log n + 1000  = O(n + log n + 1)   = O(n)
+4.7
+    (a) O(n)
+    (b) O(log n)
+    (c) O() T(n) =
