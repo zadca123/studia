@@ -29,6 +29,8 @@ def mergesort(arr):
 
 a =[3,2,5,4]
 b =[4,1,3,7]
+# print(a[:int(len(a)/2)])
+# print(a[int(len(a)/2):])
 c = merge(a,b)
 print(c)
 print(mergesort(c))

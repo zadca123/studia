@@ -1,54 +1,39 @@
 #include <iostream>
 using namespace std;
+const int N = 10;
+int T1[N] = {4, 6, 4, 12, -3, 6, -6, 1, 8, 50};
+int T2[N];  // Tablica pomocnicza
 
-// Swap two elements - Utility function
-void swap(int* a, int* b){
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-
-// partition the array using last element as pivot
-int partition (int arr[], int low, int high){
-    int pivot = arr[high];    // pivot
-    int i = (low - 1);
-    for (int j = low; j <= high- 1; j++){
-        //if current element is smaller than pivot, increment
-        //the low element swap elements at i and j
-        if (arr[j] <= pivot){
-            i++;    // increment index of smaller element
-            swap(&arr[i], &arr[j]);
-        }
+void merge(int left, int mid, int right) {
+    int i,j,k;
+    for (i=left; i<=right; i++)
+        T2[i]=T1[i];
+    i=left; j=mid+1; k=left;
+    while (i<=mid && j<=right) {
+        if (T2[i]<T2[j])
+            T1[k++]=T2[i++];
+        else
+            T1[k++]=T2[j++];
     }
-    swap(&arr[i + 1], &arr[high]);
-    return (i + 1);
+    while (i<=mid)
+        T1[k++]=T2[i++];
 }
 
-//quicksort algorithm
-void quickSort(int arr[], int low, int high){
-    if (low < high){
-        //partition the array
-        int pivot = partition(arr, low, high);
-        //sort the sub arrays independently
-        quickSort(arr, low, pivot - 1);
-        quickSort(arr, pivot + 1, high);
+void mergeSort(int left, int right) {
+    int mid;
+    if (left<right) {
+        mid=(left+right)/2;
+        mergeSort(left, mid);
+        mergeSort(mid+1, right);
+        merge(left, mid, right);
     }
 }
-
-void displayArray(int arr[], int size){
-    int i;
-    for (i=0; i < size; i++)
-        cout<<arr[i]<<", ";
-}
-
-int main(){
-    int arr[] = {12,23,3,43,51,35,19,45};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    cout<<"Input array"<<endl;
-    displayArray(arr,n);
-    cout<<endl;
-    quickSort(arr, 0, n-1);
-    cout<<"Array sorted with quick sort"<<endl;
-    displayArray(arr,n);
+int main() {
+    int i, x;
+    cout << "Przed sortowaniem:\n";
+    for(i=0; i<N; i++) cout << T1[i] << " "; cout << endl;
+    mergeSort(0, N-1);
+    cout << "Po sortowaniu:\n";
+    for(i=0; i<N; i++)  cout << T1[i] << " "; cout << endl;
     return 0;
 }

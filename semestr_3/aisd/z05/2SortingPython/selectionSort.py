@@ -6,6 +6,7 @@ def selectionSort( theSeq ):
         smallNdx = i
         # Determine if any other element contains a smaller value.
         for j in range( i + 1, n ):
+            print(theSeq)
             if theSeq[j] < theSeq[smallNdx] :
                 smallNdx = j
                 # Swap the ith value and smallNdx value only if the smallest value is
@@ -15,7 +16,9 @@ def selectionSort( theSeq ):
                     tmp = theSeq[i]
                     theSeq[i] = theSeq[smallNdx]
                     theSeq[smallNdx] = tmp
-a = [3,2,4,5,7]
-print(a)
+
+a = [80, 7, 24, 16, 43, 91, 35, 2, 19, 72]
+# a = [3,2,4,5,7]
+# print(a)
 selectionSort(a)
-print(a)
+# print(a)

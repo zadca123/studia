@@ -13,8 +13,10 @@ def insertionSort( theSeq ):
             pos -= 1
             # Put the saved value into the open slot.
             theSeq[pos] = value
+            print(theSeq)
 
-a = [3,2,4,5,7]
-print(a)
+a = [80, 7, 24, 16, 43, 91, 35, 2, 19, 72]
+# a = [3,2,4,5,7]
+# print(a)
 insertionSort(a)
-print(a)
+# print(a)

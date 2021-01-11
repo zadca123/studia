@@ -1,27 +1,29 @@
 # Implements a proleptic Gregorian calendar date as a Julian day number.
 import datetime
-import calendar
+# import calendar
 class Date :
     # Creates an object instance for the specified Gregorian date.
     def __init__( self, month = 0, day = 0, year = 0 ):
         if(month == 0 and day == 0 and  year == 0):
-            self.year = datetime.datetime.now().year()
-            self.month = datetime.datetime.now().month()
-            self.day = datetime.datetime.now().day()
-        self._julianDay = 0
-        # assert self._isValidGregorian(month, day, year), \
-        #     "Invalid Gregorian date."
+            dt = datetime.datetime.today()
+            self.month = dt.month
+            self.day =   dt.day
+            self.year =  dt.year
+        else:
+            assert self._isValidGregorian(month, day, year), "Invalid Gregorian date."
+            self.month = month
+            self.day =   day
+            self.year =  year
 
-        # The first line of the equation, T = (M - 14) / 12, has to be changed
-        # since Python's implementation of integer division is not the same
-        # as the mathematical definition.
+    def _set_julianDay(self):
         tmp = 0
-        if month < 3 :
+        if month < 3:
             tmp = -1
-            self._julianDay = day - 32075 + \
-                (1461 * (year + 4800 + tmp) // 4) + \
-                (367 * (month - 2 - tmp * 12) // 12) - \
-                (3 * ((year + 4900 + tmp) // 100) // 4)
+        self._julianDay = day - 32075 + \
+            (1461 * (year + 4800 + tmp) // 4) + \
+            (367 * (month - 2 - tmp * 12) // 12) - \
+            (3 * ((year + 4900 + tmp) // 100) // 4)
+        return self._julianDay
 
     # Extracts the appropriate Gregorian date component.
     def month( self ):
@@ -75,8 +77,10 @@ class Date :
         return month, day, year
 
     def _isValidGregorian(self):
-       x = datetime.date(month=self.month, day=self.day,year=self.year)
-       return True
+        if (day > 0 and day<=31) and year>=0 and (month > 0 and month <= 12):
+            return True
+        else:
+            return False
 
     def monthName(self):
         day_name= ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December']
